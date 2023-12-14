@@ -1,4 +1,0 @@
-repository "btl_ltg@nbduong19@cloud"
-  path "/"
-    br "/main"
-    co "/main"
