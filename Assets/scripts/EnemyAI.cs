@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         fireCooldown -= Time.deltaTime;
-        if( fireCooldown < 0)
+        if( fireCooldown < 0 && ishootable == true)
         {
             fireCooldown = timeWtbFire;
             EnemyFireBullet();

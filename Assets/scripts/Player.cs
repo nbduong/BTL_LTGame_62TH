@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,13 +15,25 @@ public class Player : MonoBehaviour
     public float RollTime;
     bool rollOne = false;
     public SpriteRenderer charaterSR;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.UpdateBar(currentHealth, maxHealth, maxHealth.ToString());
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        if (collision.CompareTag("enemyBullet"))
+        {
+            Debug.Log("va cham");
+            TakeDamage(10);
+            Destroy(collision.gameObject);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -57,16 +70,13 @@ public class Player : MonoBehaviour
             {
                 charaterSR.transform.localScale = new Vector3(-1, 1, 0);
             }
-            
         }
     }
     //mau
-
     [SerializeField] int maxHealth;
     public HealthBar healthBar;
     int currentHealth;
     public UnityEvent OnDeath;
-
     public void OnEnable()
     {
         OnDeath.AddListener(Death);
@@ -83,9 +93,23 @@ public class Player : MonoBehaviour
             OnDeath.Invoke();
         }
     }
-
     public void Death()
     {
         Destroy(gameObject);
+    }
+
+
+    private int score = 0;
+    public TextMeshProUGUI scoreText; // Kéo và thả Text UI vào đây từ Inspector
+
+    public void AddScore(int value)
+    {
+        score += value;
+        UpdateScoreUI();
+    }
+
+    private void UpdateScoreUI()
+    {
+        scoreText.text = "Score: " + score;
     }
 }

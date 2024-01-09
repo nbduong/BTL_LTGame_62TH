@@ -34,6 +34,16 @@ namespace Pathfinding {
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
 			if (target != null && ai != null) ai.destination = target.position;
-		}
+			if(target.position.x < gameObject.transform.position.x)
+			{
+				gameObject.transform.localScale = new Vector3(-1,1,1);
+			}
+			else
+			{
+                gameObject.transform.localScale = new Vector3(1, 1, 1);
+
+            }
+        }
 	}
+
 }
