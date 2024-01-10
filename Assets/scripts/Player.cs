@@ -15,12 +15,17 @@ public class Player : MonoBehaviour
     public float RollTime;
     bool rollOne = false;
     public SpriteRenderer charaterSR;
+    public GameObject panelLose;
 
 
-
+    private void Awake()
+    {
+        panelLose.SetActive(false);
+    }
     // Start is called before the first frame update
     void Start()
     {
+       
         currentHealth = maxHealth;
         healthBar.UpdateBar(currentHealth, maxHealth, maxHealth.ToString());
     }
@@ -93,14 +98,22 @@ public class Player : MonoBehaviour
             OnDeath.Invoke();
         }
     }
+    public string tagToDelete = "Enemy";
     public void Death()
     {
+        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag(tagToDelete);
+        foreach (GameObject obj in objectsWithTag)
+        {
+            Destroy(obj);
+        }
+        panelLose.SetActive(true);
         Destroy(gameObject);
+         
     }
 
 
     private int score = 0;
-    public TextMeshProUGUI scoreText; // Kéo và thả Text UI vào đây từ Inspector
+    public TextMeshProUGUI scoreText; 
 
     public void AddScore(int value)
     {

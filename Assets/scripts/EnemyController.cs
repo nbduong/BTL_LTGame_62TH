@@ -22,6 +22,16 @@ public class EnemyController : MonoBehaviour
             Destroy(collision.gameObject); 
         }
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            player = collision.GetComponent<Player>();
+            CancelInvoke("DamegePlayer");
+        }
+    }
+
     private void Update()
     {
         if (health == 0) {
