@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Controler : MonoBehaviour
 {
+
+    public GameObject panelPause;
+    public GameObject player;
+    private void Start()
+    {
+        panelPause.SetActive(false);
+
+    }
     public void newGame()
     {
         Time.timeScale = 1.0f;
@@ -16,12 +24,14 @@ public class Controler : MonoBehaviour
     }
     public void Resume()
     {
+        player.SetActive(true);
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene(0);
+        panelPause.SetActive(false);
     }
     public void Pause()
     {
+        player.SetActive(false);
         Time.timeScale = 0f;
-        SceneManager.LoadScene(2);
+        panelPause.SetActive(true);
     }
 }

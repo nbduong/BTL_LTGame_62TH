@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     public GameObject tialua;
     public float Tocdoban = 0.2f;
     public float bulletForce;
+    public AudioClip audioClip;
 
     private float tocdoban;
     // Start is called before the first frame update
@@ -62,5 +63,10 @@ public class Weapon : MonoBehaviour
         Instantiate(tialua, firePos.position, transform.rotation, transform);
         Rigidbody2D rb = bulletTmp.GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * bulletForce, ForceMode2D.Impulse);
+        // Phát audio
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.volume = 0.1f;
+        audioSource.Play();
     }
 }
